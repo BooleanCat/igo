@@ -12,7 +12,7 @@ This is by no means a complete collection of interfaces and fakes and the focus 
 Packages
 ========
 - [ios](os/os.md)
-- [iexec](os/exec/exec.md)
+- [iexec](os/exec/)
 
 Installation
 ============
