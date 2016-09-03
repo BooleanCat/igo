@@ -14,26 +14,26 @@ type Exec interface {
 }
 
 /*
-PureFakeExec returns a struct containing fake Exec with nested initialised fake
+PureFake returns a struct containing fake Exec with nested initialised fake
 members.
 
 The following Fakes are available:
 - Cmd: a FakeCmd returned by Exec.Command()
 - Process: a FakeProcess returned by Cmd.GetProcess()
 */
-type PureFakeExec struct {
+type PureFake struct {
 	Exec    *ExecFake
 	Cmd     *CmdFake
 	Process *ios.ProcessFake
 }
 
 //NewPureFake returns a fake Exec with nested new fakes within
-func NewPureFake() *PureFakeExec {
+func NewPureFake() *PureFake {
 	execFake := new(ExecFake)
 	processFake := new(ios.ProcessFake)
 	cmdFake := newPureCmdFake(processFake)
 	execFake.CommandReturns(cmdFake)
-	return &PureFakeExec{
+	return &PureFake{
 		Exec:    execFake,
 		Cmd:     cmdFake,
 		Process: processFake,
