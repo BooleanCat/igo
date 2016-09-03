@@ -9,6 +9,9 @@ import (
 	ios "github.com/BooleanCat/igo/os"
 )
 
+//CmdProvider is a type alias for exec.Command
+type CmdProvider func(name string, args ...string) Cmd
+
 //Cmd is an interface around exec.Cmd
 type Cmd interface {
 	CombinedOutput() ([]byte, error)
