@@ -1,15 +1,28 @@
+iexec
+=====
+
+When writing unit tests for a package that calls a specific system command, it can be helpful to assert that the call was made without actually calling the target binary (it may be long running or have side effects that are undesirable to have to deal with in a unit test). `iexec.Exec.Command` is a wrapper around `exec.Command` that makes this possible by using a provider pattern.
+
 Installation
-============
+------------
 
 `go get github.com/BooleanCat/igo/os/exec`
 
 Usage
-=====
+-----
 
-iexec (interfacing os/exec)
----------------------------
+Here the key features of `iexec` are shown, for a full example ginkgo test suite see the `example/` folder.
 
-When writing unit tests for a package that calls a specific system command, it can be helpful to assert that the call was made without actually calling the target binary (it may be long running or have side effects that are undesirable to have to deal with in a unit test). `iexec.Exec.Command` is a wrapper around `exec.Command` that makes this possible by using a provider pattern such as:
+Suppose we have some function, `foo`, that calls out to a system command.
+
+```go
+func foo() {
+    cmd := exec.Command("my-binary")
+    cmd.Run()
+}
+```
+
+It would be preferable, for the purposes of a unit test, to check that `my-binary` would have been called without actually calling it; enter `iexec`. If the function is rewritten as:
 
 ```go
 func foo(command iexec.CmdProvider) {
@@ -41,7 +54,7 @@ Describe("foo", func(), {
 ...
 ```
 
-When using `foo` in a non unit test situation, just use `foo(new(iexec.Exec).Command)`.
+Using `new(iexec.Exec).Command` as a provider to `foo` will behave exactly as `exec.Commnd` does.
 
 In the example above, we haven't covered testing around whether or not our function called `cmd.Run()`. This can be easily achieved by using the helper `iexec.NewPureFake()`:
 
