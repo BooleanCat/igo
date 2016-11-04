@@ -4,8 +4,6 @@ package iuser
 import (
 	"os/user"
 	"sync"
-
-	"github.com/BooleanCat/igo/os/user"
 )
 
 type UserFake struct {
@@ -121,4 +119,4 @@ func (fake *UserFake) recordInvocation(key string, args []interface{}) {
 	fake.invocations[key] = append(fake.invocations[key], args)
 }
 
-var _ iuser.User = new(UserFake)
+var _ User = new(UserFake)
