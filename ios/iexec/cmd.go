@@ -6,7 +6,7 @@ import (
 	"os/exec"
 	"syscall"
 
-	ios "github.com/BooleanCat/igo/os"
+	"github.com/BooleanCat/igo/ios"
 )
 
 //CmdProvider is a type alias for exec.Command

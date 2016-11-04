@@ -8,7 +8,7 @@ import (
 	"sync"
 	"syscall"
 
-	ios "github.com/BooleanCat/igo/os"
+	"github.com/BooleanCat/igo/ios"
 )
 
 //CmdFake ...

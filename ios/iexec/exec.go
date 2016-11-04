@@ -5,7 +5,7 @@ import (
 	"io/ioutil"
 	"os/exec"
 
-	ios "github.com/BooleanCat/igo/os"
+	"github.com/BooleanCat/igo/ios"
 )
 
 //Exec is an interface around os/exec

@@ -3,7 +3,7 @@ package example_test
 import (
 	"strings"
 
-	iexec "github.com/BooleanCat/igo/os/exec"
+	"github.com/BooleanCat/igo/ios/iexec"
 	. "github.com/onsi/ginkgo"
 	. "github.com/onsi/gomega"
 )

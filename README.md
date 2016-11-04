@@ -11,8 +11,8 @@ This is by no means a complete collection of interfaces and fakes and the focus 
 
 Packages
 ========
-- [ios](os/)
-- [iexec](os/exec/)
+- [ios](ios/)
+- [iexec](ios/iexec/)
 
 Installation
 ============
