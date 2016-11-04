@@ -47,10 +47,11 @@ type IoutilFake struct {
 		result1 string
 		result2 error
 	}
-	TempFileStub        func(string) (*os.File, error)
+	TempFileStub        func(string, string) (*os.File, error)
 	tempFileMutex       sync.RWMutex
 	tempFileArgsForCall []struct {
 		arg1 string
+		arg2 string
 	}
 	tempFileReturns struct {
 		result1 *os.File
@@ -220,15 +221,16 @@ func (fake *IoutilFake) TempDirReturns(result1 string, result2 error) {
 }
 
 //TempFile ...
-func (fake *IoutilFake) TempFile(arg1 string) (*os.File, error) {
+func (fake *IoutilFake) TempFile(arg1 string, arg2 string) (*os.File, error) {
 	fake.tempFileMutex.Lock()
 	fake.tempFileArgsForCall = append(fake.tempFileArgsForCall, struct {
 		arg1 string
-	}{arg1})
+		arg2 string
+	}{arg1, arg2})
 	fake.recordInvocation("TempFile", []interface{}{arg1})
 	fake.tempFileMutex.Unlock()
 	if fake.TempFileStub != nil {
-		return fake.TempFileStub(arg1)
+		return fake.TempFileStub(arg1, arg2)
 	}
 	return fake.tempFileReturns.result1, fake.tempFileReturns.result2
 }
@@ -241,10 +243,10 @@ func (fake *IoutilFake) TempFileCallCount() int {
 }
 
 //TempFileArgsForCall ...
-func (fake *IoutilFake) TempFileArgsForCall(i int) string {
+func (fake *IoutilFake) TempFileArgsForCall(i int) (string, string) {
 	fake.tempFileMutex.RLock()
 	defer fake.tempFileMutex.RUnlock()
-	return fake.tempFileArgsForCall[i].arg1
+	return fake.tempFileArgsForCall[i].arg1, fake.tempFileArgsForCall[i].arg2
 }
 
 //TempFileReturns ...

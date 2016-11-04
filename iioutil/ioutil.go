@@ -12,7 +12,7 @@ type Ioutil interface {
 	ReadDir(string) ([]os.FileInfo, error)
 	ReadFile(string) ([]byte, error)
 	TempDir(string, string) (string, error)
-	TempFile(string) (*os.File, error)
+	TempFile(string, string) (*os.File, error)
 	WriteFile(string, []byte, os.FileMode) error
 }
 
