@@ -5,9 +5,10 @@ package ios
 import (
 	"os"
 	"sync"
+
+	"github.com/BooleanCat/igo/ios"
 )
 
-//OSFake ...
 type OSFake struct {
 	RenameStub        func(string, string) error
 	renameMutex       sync.RWMutex
@@ -45,11 +46,21 @@ type OSFake struct {
 	chownReturns struct {
 		result1 error
 	}
+	OpenFileStub        func(string, int, os.FileMode) (*os.File, error)
+	openFileMutex       sync.RWMutex
+	openFileArgsForCall []struct {
+		arg1 string
+		arg2 int
+		arg3 os.FileMode
+	}
+	openFileReturns struct {
+		result1 *os.File
+		result2 error
+	}
 	invocations      map[string][][]interface{}
 	invocationsMutex sync.RWMutex
 }
 
-//Rename ...
 func (fake *OSFake) Rename(arg1 string, arg2 string) error {
 	fake.renameMutex.Lock()
 	fake.renameArgsForCall = append(fake.renameArgsForCall, struct {
@@ -60,25 +71,23 @@ func (fake *OSFake) Rename(arg1 string, arg2 string) error {
 	fake.renameMutex.Unlock()
 	if fake.RenameStub != nil {
 		return fake.RenameStub(arg1, arg2)
+	} else {
+		return fake.renameReturns.result1
 	}
-	return fake.renameReturns.result1
 }
 
-//RenameCallCount ...
 func (fake *OSFake) RenameCallCount() int {
 	fake.renameMutex.RLock()
 	defer fake.renameMutex.RUnlock()
 	return len(fake.renameArgsForCall)
 }
 
-//RenameArgsForCall ...
 func (fake *OSFake) RenameArgsForCall(i int) (string, string) {
 	fake.renameMutex.RLock()
 	defer fake.renameMutex.RUnlock()
 	return fake.renameArgsForCall[i].arg1, fake.renameArgsForCall[i].arg2
 }
 
-//RenameReturns ...
 func (fake *OSFake) RenameReturns(result1 error) {
 	fake.RenameStub = nil
 	fake.renameReturns = struct {
@@ -86,7 +95,6 @@ func (fake *OSFake) RenameReturns(result1 error) {
 	}{result1}
 }
 
-//Remove ...
 func (fake *OSFake) Remove(arg1 string) error {
 	fake.removeMutex.Lock()
 	fake.removeArgsForCall = append(fake.removeArgsForCall, struct {
@@ -96,25 +104,23 @@ func (fake *OSFake) Remove(arg1 string) error {
 	fake.removeMutex.Unlock()
 	if fake.RemoveStub != nil {
 		return fake.RemoveStub(arg1)
+	} else {
+		return fake.removeReturns.result1
 	}
-	return fake.removeReturns.result1
 }
 
-//RemoveCallCount ...
 func (fake *OSFake) RemoveCallCount() int {
 	fake.removeMutex.RLock()
 	defer fake.removeMutex.RUnlock()
 	return len(fake.removeArgsForCall)
 }
 
-//RemoveArgsForCall ...
 func (fake *OSFake) RemoveArgsForCall(i int) string {
 	fake.removeMutex.RLock()
 	defer fake.removeMutex.RUnlock()
 	return fake.removeArgsForCall[i].arg1
 }
 
-//RemoveReturns ...
 func (fake *OSFake) RemoveReturns(result1 error) {
 	fake.RemoveStub = nil
 	fake.removeReturns = struct {
@@ -122,7 +128,6 @@ func (fake *OSFake) RemoveReturns(result1 error) {
 	}{result1}
 }
 
-//Chmod ...
 func (fake *OSFake) Chmod(arg1 string, arg2 os.FileMode) error {
 	fake.chmodMutex.Lock()
 	fake.chmodArgsForCall = append(fake.chmodArgsForCall, struct {
@@ -133,25 +138,23 @@ func (fake *OSFake) Chmod(arg1 string, arg2 os.FileMode) error {
 	fake.chmodMutex.Unlock()
 	if fake.ChmodStub != nil {
 		return fake.ChmodStub(arg1, arg2)
+	} else {
+		return fake.chmodReturns.result1
 	}
-	return fake.chmodReturns.result1
 }
 
-//ChmodCallCount ...
 func (fake *OSFake) ChmodCallCount() int {
 	fake.chmodMutex.RLock()
 	defer fake.chmodMutex.RUnlock()
 	return len(fake.chmodArgsForCall)
 }
 
-//ChmodArgsForCall ...
 func (fake *OSFake) ChmodArgsForCall(i int) (string, os.FileMode) {
 	fake.chmodMutex.RLock()
 	defer fake.chmodMutex.RUnlock()
 	return fake.chmodArgsForCall[i].arg1, fake.chmodArgsForCall[i].arg2
 }
 
-//ChmodReturns ...
 func (fake *OSFake) ChmodReturns(result1 error) {
 	fake.ChmodStub = nil
 	fake.chmodReturns = struct {
@@ -159,7 +162,6 @@ func (fake *OSFake) ChmodReturns(result1 error) {
 	}{result1}
 }
 
-//Chown ...
 func (fake *OSFake) Chown(arg1 string, arg2 int, arg3 int) error {
 	fake.chownMutex.Lock()
 	fake.chownArgsForCall = append(fake.chownArgsForCall, struct {
@@ -171,25 +173,23 @@ func (fake *OSFake) Chown(arg1 string, arg2 int, arg3 int) error {
 	fake.chownMutex.Unlock()
 	if fake.ChownStub != nil {
 		return fake.ChownStub(arg1, arg2, arg3)
+	} else {
+		return fake.chownReturns.result1
 	}
-	return fake.chownReturns.result1
 }
 
-//ChownCallCount ...
 func (fake *OSFake) ChownCallCount() int {
 	fake.chownMutex.RLock()
 	defer fake.chownMutex.RUnlock()
 	return len(fake.chownArgsForCall)
 }
 
-//ChownArgsForCall ...
 func (fake *OSFake) ChownArgsForCall(i int) (string, int, int) {
 	fake.chownMutex.RLock()
 	defer fake.chownMutex.RUnlock()
 	return fake.chownArgsForCall[i].arg1, fake.chownArgsForCall[i].arg2, fake.chownArgsForCall[i].arg3
 }
 
-//ChownReturns ...
 func (fake *OSFake) ChownReturns(result1 error) {
 	fake.ChownStub = nil
 	fake.chownReturns = struct {
@@ -197,7 +197,42 @@ func (fake *OSFake) ChownReturns(result1 error) {
 	}{result1}
 }
 
-//Invocations ...
+func (fake *OSFake) OpenFile(arg1 string, arg2 int, arg3 os.FileMode) (*os.File, error) {
+	fake.openFileMutex.Lock()
+	fake.openFileArgsForCall = append(fake.openFileArgsForCall, struct {
+		arg1 string
+		arg2 int
+		arg3 os.FileMode
+	}{arg1, arg2, arg3})
+	fake.recordInvocation("OpenFile", []interface{}{arg1, arg2, arg3})
+	fake.openFileMutex.Unlock()
+	if fake.OpenFileStub != nil {
+		return fake.OpenFileStub(arg1, arg2, arg3)
+	} else {
+		return fake.openFileReturns.result1, fake.openFileReturns.result2
+	}
+}
+
+func (fake *OSFake) OpenFileCallCount() int {
+	fake.openFileMutex.RLock()
+	defer fake.openFileMutex.RUnlock()
+	return len(fake.openFileArgsForCall)
+}
+
+func (fake *OSFake) OpenFileArgsForCall(i int) (string, int, os.FileMode) {
+	fake.openFileMutex.RLock()
+	defer fake.openFileMutex.RUnlock()
+	return fake.openFileArgsForCall[i].arg1, fake.openFileArgsForCall[i].arg2, fake.openFileArgsForCall[i].arg3
+}
+
+func (fake *OSFake) OpenFileReturns(result1 *os.File, result2 error) {
+	fake.OpenFileStub = nil
+	fake.openFileReturns = struct {
+		result1 *os.File
+		result2 error
+	}{result1, result2}
+}
+
 func (fake *OSFake) Invocations() map[string][][]interface{} {
 	fake.invocationsMutex.RLock()
 	defer fake.invocationsMutex.RUnlock()
@@ -209,6 +244,8 @@ func (fake *OSFake) Invocations() map[string][][]interface{} {
 	defer fake.chmodMutex.RUnlock()
 	fake.chownMutex.RLock()
 	defer fake.chownMutex.RUnlock()
+	fake.openFileMutex.RLock()
+	defer fake.openFileMutex.RUnlock()
 	return fake.invocations
 }
 
@@ -224,4 +261,4 @@ func (fake *OSFake) recordInvocation(key string, args []interface{}) {
 	fake.invocations[key] = append(fake.invocations[key], args)
 }
 
-var _ OS = new(OSFake)
+var _ ios.OS = new(OSFake)
