@@ -5,8 +5,6 @@ package ios
 import (
 	"os"
 	"sync"
-
-	"github.com/BooleanCat/igo/ios"
 )
 
 type OSFake struct {
@@ -261,4 +259,4 @@ func (fake *OSFake) recordInvocation(key string, args []interface{}) {
 	fake.invocations[key] = append(fake.invocations[key], args)
 }
 
-var _ ios.OS = new(OSFake)
+var _ OS = new(OSFake)
