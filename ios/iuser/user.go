@@ -6,6 +6,7 @@ import "os/user"
 type User interface {
 	Lookup(string) (*user.User, error)
 	LookupGroup(string) (*user.Group, error)
+	Current() (*user.User, error)
 }
 
 //UserWrap is a wrapper around user that implements iuser.User
@@ -19,4 +20,9 @@ func (userWrap *UserWrap) Lookup(username string) (*user.User, error) {
 //LookupGroup is a wrapper around user.LookupGroup()
 func (userWrap *UserWrap) LookupGroup(name string) (*user.Group, error) {
 	return user.LookupGroup(name)
+}
+
+//Current is a wrapper around user.Current()
+func (userWrap *UserWrap) Current() (*user.User, error) {
+	return user.Current()
 }
