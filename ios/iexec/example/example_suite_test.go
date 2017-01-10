@@ -9,5 +9,5 @@ import (
 
 func TestExample(t *testing.T) {
 	RegisterFailHandler(Fail)
-	RunSpecs(t, "Example Suite")
+	RunSpecs(t, "iexec example suite")
 }
