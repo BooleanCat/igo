@@ -9,20 +9,25 @@ type User interface {
 	Current() (*user.User, error)
 }
 
-//UserWrap is a wrapper around user that implements iuser.User
-type UserWrap struct{}
+//Real is a wrapper around user that implements iuser.User
+type Real struct{}
+
+//New creates a struct that behaves like the user package
+func New() *Real {
+	return new(Real)
+}
 
 //Lookup is a wrapper around user.Lookup()
-func (userWrap *UserWrap) Lookup(username string) (*user.User, error) {
+func (*Real) Lookup(username string) (*user.User, error) {
 	return user.Lookup(username)
 }
 
 //LookupGroup is a wrapper around user.LookupGroup()
-func (userWrap *UserWrap) LookupGroup(name string) (*user.Group, error) {
+func (*Real) LookupGroup(name string) (*user.Group, error) {
 	return user.LookupGroup(name)
 }
 
 //Current is a wrapper around user.Current()
-func (userWrap *UserWrap) Current() (*user.User, error) {
+func (*Real) Current() (*user.User, error) {
 	return user.Current()
 }
