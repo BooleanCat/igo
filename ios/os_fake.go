@@ -75,6 +75,13 @@ type OSFake struct {
 		result1 Process
 		result2 error
 	}
+	GetwdStub        func() (string, error)
+	getwdMutex       sync.RWMutex
+	getwdArgsForCall []struct{}
+	getwdReturns     struct {
+		result1 string
+		result2 error
+	}
 	invocations      map[string][][]interface{}
 	invocationsMutex sync.RWMutex
 }
@@ -340,6 +347,34 @@ func (fake *OSFake) FindProcessReturns(result1 Process, result2 error) {
 	}{result1, result2}
 }
 
+//Getwd ...
+func (fake *OSFake) Getwd() (string, error) {
+	fake.getwdMutex.Lock()
+	fake.getwdArgsForCall = append(fake.getwdArgsForCall, struct{}{})
+	fake.recordInvocation("Getwd", []interface{}{})
+	fake.getwdMutex.Unlock()
+	if fake.GetwdStub != nil {
+		return fake.GetwdStub()
+	}
+	return fake.getwdReturns.result1, fake.getwdReturns.result2
+}
+
+//GetwdCallCount ...
+func (fake *OSFake) GetwdCallCount() int {
+	fake.getwdMutex.RLock()
+	defer fake.getwdMutex.RUnlock()
+	return len(fake.getwdArgsForCall)
+}
+
+//GetwdReturns ...
+func (fake *OSFake) GetwdReturns(result1 string, result2 error) {
+	fake.GetwdStub = nil
+	fake.getwdReturns = struct {
+		result1 string
+		result2 error
+	}{result1, result2}
+}
+
 //Invocations ...
 func (fake *OSFake) Invocations() map[string][][]interface{} {
 	fake.invocationsMutex.RLock()
@@ -358,6 +393,8 @@ func (fake *OSFake) Invocations() map[string][][]interface{} {
 	defer fake.statMutex.RUnlock()
 	fake.findProcessMutex.RLock()
 	defer fake.findProcessMutex.RUnlock()
+	fake.getwdMutex.RLock()
+	defer fake.getwdMutex.RUnlock()
 	return fake.invocations
 }
 

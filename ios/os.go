@@ -11,6 +11,7 @@ type OS interface {
 	OpenFile(string, int, os.FileMode) (*os.File, error)
 	Stat(string) (os.FileInfo, error)
 	FindProcess(int) (Process, error)
+	Getwd() (string, error)
 }
 
 //OSWrap is a wrapper around os that implements ios.OS
@@ -50,4 +51,9 @@ func (osw *OSWrap) Stat(name string) (os.FileInfo, error) {
 func (osw *OSWrap) FindProcess(pid int) (Process, error) {
 	process, err := os.FindProcess(pid)
 	return &ProcessWrap{process: process}, err
+}
+
+//Getwd is a wrapper around os.Getwd()
+func (osw *OSWrap) Getwd() (string, error) {
+	return os.Getwd()
 }
