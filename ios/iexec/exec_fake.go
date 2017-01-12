@@ -3,7 +3,13 @@
 
 package iexec
 
-import "sync"
+import (
+	"bytes"
+	"io/ioutil"
+	"sync"
+
+	"github.com/BooleanCat/igo/ios"
+)
 
 //Fake ...
 type Fake struct {
@@ -81,6 +87,41 @@ func (fake *Fake) recordInvocation(key string, args []interface{}) {
 		fake.invocations[key] = [][]interface{}{}
 	}
 	fake.invocations[key] = append(fake.invocations[key], args)
+}
+
+/*
+NestedCommandFake is a struct containing a fake Exec with nested initialised fake
+members.
+
+The following Fakes are available:
+- Cmd: a FakeCmd returned by Exec.Command()
+- Process: a FakeProcess returned by Cmd.GetProcess()
+*/
+type NestedCommandFake struct {
+	Exec    *Fake
+	Cmd     *CmdFake
+	Process *ios.ProcessFake
+}
+
+//NewNestedCommandFake returns a fake Exec with nested new fakes within
+func NewNestedCommandFake() *NestedCommandFake {
+	execFake := NewFake()
+	processFake := new(ios.ProcessFake)
+	cmdFake := newNestedCmdFake(processFake)
+	execFake.CommandReturns(cmdFake)
+	return &NestedCommandFake{
+		Exec:    execFake,
+		Cmd:     cmdFake,
+		Process: processFake,
+	}
+}
+
+func newNestedCmdFake(process ios.Process) *CmdFake {
+	fake := NewCmdFake()
+	fake.GetProcessReturns(process)
+	fake.StdoutPipeReturns(ioutil.NopCloser(new(bytes.Buffer)), nil)
+	fake.StderrPipeReturns(ioutil.NopCloser(new(bytes.Buffer)), nil)
+	return fake
 }
 
 var _ Exec = new(Fake)

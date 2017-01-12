@@ -15,10 +15,10 @@ func foo(command iexec.CmdProvider) {
 }
 
 var _ = Describe("iexec", func() {
-	var execFakes *iexec.PureFake
+	var fakes *iexec.NestedCommandFake
 
 	BeforeEach(func() {
-		execFakes = iexec.NewPureFake()
+		fakes = iexec.NewNestedCommandFake()
 	})
 
 	Describe("foo", func() {
@@ -29,8 +29,8 @@ var _ = Describe("iexec", func() {
 		)
 
 		BeforeEach(func() {
-			foo(execFakes.Exec.Command)
-			commandName, commandArgs = execFakes.Exec.CommandArgsForCall(0)
+			foo(fakes.Exec.Command)
+			commandName, commandArgs = fakes.Exec.CommandArgsForCall(0)
 			joinedArgs = strings.Join(commandArgs, " ")
 		})
 
@@ -43,11 +43,11 @@ var _ = Describe("iexec", func() {
 		})
 
 		It("calls cmd.Start()", func() {
-			Expect(execFakes.Cmd.StartCallCount()).To(Equal(1))
+			Expect(fakes.Cmd.StartCallCount()).To(Equal(1))
 		})
 
 		It("calls Process.Kill()", func() {
-			Expect(execFakes.Process.KillCallCount()).To(Equal(1))
+			Expect(fakes.Process.KillCallCount()).To(Equal(1))
 		})
 	})
 })
