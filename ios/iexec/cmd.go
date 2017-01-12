@@ -188,7 +188,7 @@ func (c *CmdReal) SetSysProcAttr(attr *syscall.SysProcAttr) {
 
 //GetProcess is a wrapper around getting exec.Cmd.Process as an ios.Process
 func (c *CmdReal) GetProcess() ios.Process {
-	return ios.NewProcessWrap(c.cmd.Process)
+	return ios.NewProcess(c.cmd.Process)
 }
 
 //SetProcess is a wrapper around setting exec.Cmd.Process

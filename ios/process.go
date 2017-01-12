@@ -18,7 +18,10 @@ type ProcessReal struct {
 }
 
 //NewProcess creates a struct that behaves like os.Process
-func NewProcess() Process {
+func NewProcess(process ...*os.Process) Process {
+	if len(process) > 0 {
+		return &ProcessReal{process: process[0]}
+	}
 	return &ProcessReal{process: new(os.Process)}
 }
 
