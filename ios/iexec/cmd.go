@@ -53,7 +53,7 @@ type CmdReal struct {
 
 //NewCmd creates a struct that behaves like exec.Cmd
 func NewCmd() *CmdReal {
-	return new(CmdReal)
+	return &CmdReal{cmd: new(exec.Cmd)}
 }
 
 //CombinedOutput is a wrapper around exec.Cmd.CombinedOutput()
