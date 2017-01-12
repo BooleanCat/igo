@@ -50,7 +50,7 @@ func (osw *OSWrap) Stat(name string) (os.FileInfo, error) {
 //FindProcess is a wrapper around os.FindProcess()
 func (osw *OSWrap) FindProcess(pid int) (Process, error) {
 	process, err := os.FindProcess(pid)
-	return &ProcessWrap{process: process}, err
+	return &ProcessReal{process: process}, err
 }
 
 //Getwd is a wrapper around os.Getwd()
