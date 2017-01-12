@@ -52,7 +52,7 @@ type ProcessFake struct {
 	invocationsMutex sync.RWMutex
 }
 
-//NewProcessFake is the preffered way to initialise a ProcessFake
+//NewProcessFake is the preferred way to initialise a ProcessFake
 func NewProcessFake() *ProcessFake {
 	return new(ProcessFake)
 }
