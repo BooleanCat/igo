@@ -52,7 +52,10 @@ type CmdReal struct {
 }
 
 //NewCmd creates a struct that behaves like exec.Cmd
-func NewCmd() *CmdReal {
+func NewCmd(cmd ...*exec.Cmd) *CmdReal {
+	if len(cmd) > 0 {
+		return &CmdReal{cmd: cmd[0]}
+	}
 	return &CmdReal{cmd: new(exec.Cmd)}
 }
 
