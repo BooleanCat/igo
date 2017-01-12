@@ -17,7 +17,7 @@ type ProcessReal struct {
 	process *os.Process
 }
 
-//NewProcess creates a ProcessWrap from a os.Process
+//NewProcess creates a struct that behaves like os.Process
 func NewProcess() Process {
 	return &ProcessReal{process: new(os.Process)}
 }
