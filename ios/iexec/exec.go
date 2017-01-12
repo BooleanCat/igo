@@ -53,5 +53,5 @@ type ExecWrap struct{}
 
 //Command is a wrapper around exec.Command()
 func (e *ExecWrap) Command(name string, args ...string) Cmd {
-	return &CmdWrap{cmd: exec.Command(name, args...)}
+	return &CmdReal{cmd: exec.Command(name, args...)}
 }
