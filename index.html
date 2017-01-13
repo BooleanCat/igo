@@ -38,66 +38,49 @@
 			provided within Igo's packages.</p>
 
 			<pre><code>
-        type Thing struct{
-          ...
-          os ios.OS
-        }
+type Thing struct{
+  ...
+  os ios.OS
+}
 
-        func NewThing() *Thing {
-          return &Thing{
-            exec: ios.New()
-          }
-        }
+func NewThing() *Thing {
+  return &Thing{
+    exec: ios.New()
+  }
+}
 
-        func (thing *Thing) Do() {
-          thing.exec.Remove("/some/file")
-        }
+func (thing *Thing) Do() {
+  thing.exec.Remove("/some/file")
+}
 
-        ...
+...
 
-        It("doesn't return an error", func() {
-          err := thing.Do()
-          Expect(err).NotTo(HaveOccurred())
-        })
+It("doesn't return an error", func() {
+  err := thing.Do()
+  Expect(err).NotTo(HaveOccurred())
+})
 
-        It("returns an error", func() {
-          fakeOS := ios.NewFake()
-          fakeOS.RemoveReturns(errors.New("I failed!"))
-          thing.exec = fakeOS
+It("returns an error", func() {
+  fakeOS := ios.NewFake()
+  fakeOS.RemoveReturns(errors.New("I failed!"))
+  thing.exec = fakeOS
 
-          err := thing.Do()
-          Expect(err).To(HaveOccurred())
-        })
+  err := thing.Do()
+  Expect(err).To(HaveOccurred())
+})
       </code></pre>
-
-			<pre><code></code>
-
-
-            </pre>
-
-			<pre></pre>
 
 			<h3><a aria-hidden="true" class="anchor" href="#installation" id="designer-templates"><span aria-hidden="true"
 			class="octicon octicon-link"></span></a>Installation</h3>
 
-			<pre>
-
-
-            <br><code>go get github.com/BooleanCat/igo/ios</code>
-
-
-            </pre>
+			<pre><code>go get github.com/BooleanCat/igo/ios</code></pre>
 
 			<h3><a aria-hidden="true" class="anchor" href="#support-or-contact" id="support-or-contact"><span aria-hidden="true"
 			class="octicon octicon-link"></span></a>Support or Contact</h3>
 
-			<pre>
-
-
-            <br>Having trouble with Pages? Check out our <a href=
+			<br>Having trouble with Pages? Check out our <a href=
 "https://help.github.com/pages">documentation</a> or <a href=
 "https://github.com/contact">contact support</a> and we’ll help you sort it out.
-        </pre>
 		</section>
 	</div>
 	<!-- FOOTER  -->
