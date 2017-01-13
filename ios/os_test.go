@@ -26,4 +26,14 @@ var _ = Describe("ios", func() {
 			var _ ios.Process = ios.NewProcessFake()
 		})
 	})
+
+	Describe("ProcessState", func() {
+		It("is implemented by ProcessStateReal", func() {
+			var _ ios.ProcessState = ios.NewProcessState()
+		})
+
+		It("is implemented by ProcessStateFake", func() {
+			var _ ios.ProcessState = ios.NewProcessStateFake()
+		})
+	})
 })
