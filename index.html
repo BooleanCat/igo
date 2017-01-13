@@ -49,8 +49,8 @@ func NewThing() *Thing {
   }
 }
 
-func (thing *Thing) Do() {
-  thing.exec.Remove("/some/file")
+func (thing *Thing) Do() error {
+  return thing.exec.Remove("/some/file")
 }
 
 ...
