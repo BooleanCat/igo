@@ -1,6 +1,8 @@
 package inet_test
 
 import (
+	"net"
+
 	. "github.com/onsi/ginkgo"
 
 	"github.com/BooleanCat/igo/inet"
@@ -14,6 +16,12 @@ var _ = Describe("inet", func() {
 
 		It("is implemented by Fake", func() {
 			var _ inet.Net = inet.NewFake()
+		})
+	})
+
+	Describe("net.Listener", func() {
+		It("is implemented by ListenerFake", func() {
+			var _ net.Listener = inet.NewListenerFake()
 		})
 	})
 })
