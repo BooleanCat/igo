@@ -24,4 +24,10 @@ var _ = Describe("inet", func() {
 			var _ net.Listener = inet.NewListenerFake()
 		})
 	})
+
+	Describe("net.Conn", func() {
+		It("is implemented by ConnFake", func() {
+			var _ net.Conn = inet.NewConnFake()
+		})
+	})
 })
